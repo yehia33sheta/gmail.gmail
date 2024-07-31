@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيع حسابات Gmail</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://i.pinimg.com/564x/b4/2d/13/b42d13d9123bfb6242b05307872b3a56.jpg') no-repeat center center/cover;
+            color: #333;
+            direction: rtl;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a, nav button {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            background-color: #ff5722;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 0 10px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover, nav button:hover {
+            background-color: #ff3d00;
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-container input, .form-container select, .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #388e3c;
+        }
+
+        .user-info {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            text-align: left;
+        }
+
+        .user-info h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .user-info p {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .edit-btn, .delete-btn, .buy-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            position: absolute;
+            font-size: 14px;
+            display: none;
+            top: 15px;
+        }
+
+        .edit-btn {
+            right: 110px;
+        }
+
+        .edit-btn:hover {
+            background-color: #f57c00;
+        }
+
+        .delete-btn {
+            right: 60px;
+            background-color: #f44336;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .buy-btn {
+            right: 10px;
+            background-color: #4caf50;
+        }
+
+        .buy-btn:hover {
+            background-color: #388e3c;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 8px;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav a, nav button {
+                font-size: 16px;
+                padding: 8px 15px;
+                margin: 5px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+
+            .user-info {
+                padding: 10px;
+            }
+
+            .edit-btn, .delete-btn, .buy-btn {
+                font-size: 12px;
+                padding: 5px 10px;
+                right: auto;
+                display: block;
+                margin: 5px auto;
+                top: auto;
+            }
+
+            .edit-btn {
+                background-color: #ff9800;
+            }
+
+            .delete-btn {
+                background-color: #f44336;
+            }
+
+            .buy-btn {
+                background-color: #4caf50;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>بيع حسابات Gmail</h1>
+    </header>
+    <nav>
+        <a href="#" id="homeLink">الرئيسية</a>
+        <a href="#" id="publishLink">نشر حساب جديد</a>
+        <a href="#" id="aboutLink">عن الموقع</a>
+        <button onclick="window.location.href='mailto:yahyasheta29@gmail.com'" class="btn">الدعم الفني</button>
+    </nav>
+
+    <div class="container" id="publishFormContainer" style="display: none;">
+        <h2>نموذج نشر حساب جديد</h2>
+        <form id="accountForm">
+            <label for="accountCount">عدد الحسابات:</label>
+            <input type="number" id="accountCount" name="accountCount" required>
+            
+            <label for="nameType">ما هي أسماء الجميلات:</label>
+            <select id="nameType" name="nameType" required>
+                <option value="اجنبية">أجنبية</option>
+                <option value="مصرية">مصرية</option>
+            </select>
+
+            <label for="recoveryEmail">هل يوجد بريد استرداد:</label>
+            <select id="recoveryEmail" name="recoveryEmail" required>
+                <option value="نعم">نعم</option>
+                <option value="لا">لا</option>
+            </select>
+
+            <button type="submit">نشر الحساب</button>
+        </form>
+    </div>
+
+    <div class="container" id="userInfoContainer">
+        <!-- هنا سيتم عرض معلومات المستخدمين -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 بيع حسابات Gmail. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- Modal About -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>عن الموقع</h2>
+            <p><strong>مصمم هذا الموقع هو Yahya Sheta</strong></p>
+            <p>هذا الموقع يتميز بالأمان.</p>
+            <p>للشكاوى: <a href="https://wa.me/01028467480" style="color: #007bff;">01028467480</a></p>
+        </div>
+    </div>
+
+    <script>
+        var currentUser = 'user1'; // Example current user for demo. Replace with actual user identification logic.
+        var accounts = [
+            // Example accounts for demonstration
+            { id: 1, count: 5, nameType: 'أجنبية', recoveryEmail: 'نعم', owner: 'user1' },
+            { id: 2, count: 3, nameType: 'مصرية', recoveryEmail: 'لا', owner: 'user2' }
+        ];
+
+        function displayAccounts() {
+            var userInfoContainer = document.getElementById('userInfoContainer');
+            userInfoContainer.innerHTML = '';
+
+            accounts.forEach(account => {
+                var userInfoDiv = document.createElement('div');
+                userInfoDiv.className = 'user-info';
+
+                var editButtonStyle = account.owner === currentUser ? 'inline-block' : 'none';
+                var deleteButtonStyle = account.owner === currentUser ? 'inline-block' : 'none';
+
+                userInfoDiv.innerHTML = `
+                    <h3>معلومات الحساب</h3>
+                    <p>عدد الحسابات: ${account.count}</p>
+                    <p>ما هي أسماء الجميلات: ${account.nameType}</p>
+                    <p>هل يوجد بريد استرداد: ${account.recoveryEmail}</p>
+                    <button class="edit-btn" style="display: ${editButtonStyle};" onclick="editAccount(${account.id})">تعديل</button>
+                    <button class="delete-btn" style="display: ${deleteButtonStyle};" onclick="deleteAccount(${account.id})">حذف</button>
+                    <button class="buy-btn">شراء</button>
+                `;
+                userInfoContainer.appendChild(userInfoDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayAccounts();
+        });
+
+        // Show publish form
+        document.getElementById('publishLink').onclick = function() {
+            document.getElementById('publishFormContainer').style.display = 'block';
+            document.getElementById('userInfoContainer').style.display = 'none';
+        };
+
+        // Show user info
+        document.getElementById('homeLink').onclick = function() {
+            document.getElementById('publishFormContainer').style.display = 'none';
+            document.getElementById('userInfoContainer').style.display = 'block';
+
+            displayAccounts();
+        };
+
+        // Show About modal
+        document.getElementById('aboutLink').onclick = function() {
+            document.getElementById('aboutModal').style.display = 'block';
+        };
+
+        // Close About modal
+        var span = document.getElementsByClassName('close')[0];
+        span.onclick = function() {
+            document.getElementById('aboutModal').style.display = 'none';
+        };
+
+        // Handle form submission
+        document.getElementById('accountForm').onsubmit = function(e) {
+            e.preventDefault();
+
+            var accountCount = document.getElementById('accountCount').value;
+            var nameType = document.getElementById('nameType').value;
+            var recoveryEmail = document.getElementById('recoveryEmail').value;
+
+            var newAccount = {
+                id: Date.now(), // Unique ID for the account
+                count: accountCount,
+                nameType: nameType,
+                recoveryEmail: recoveryEmail,
+                owner: currentUser
+            };
+
+            accounts.push(newAccount);
+
+            document.getElementById('publishFormContainer').style.display = 'none';
+            document.getElementById('userInfoContainer').style.display = 'block';
+
+            displayAccounts();
+        };
+
+        // Edit account function
+        function editAccount(id) {
+            var account = accounts.find(a => a.id === id);
+            if (account && account.owner === currentUser) {
+                var newCount = prompt("عدد الحسابات:", account.count);
+                var newNameType = prompt("ما هي أسماء الجميلات:", account.nameType);
+                var newRecoveryEmail = prompt("هل يوجد بريد استرداد:", account.recoveryEmail);
+
+                if (newCount !== null && newNameType !== null && newRecoveryEmail !== null) {
+                    account.count = newCount;
+                    account.nameType = newNameType;
+                    account.recoveryEmail = newRecoveryEmail;
+
+                    displayAccounts();
+                }
+            } else {
+                alert("لا يمكنك تعديل هذا الحساب.");
+            }
+        }
+
+        // Delete account function
+        function deleteAccount(id) {
+            var index = accounts.findIndex(a => a.id === id);
+            if (index !== -1) {
+                if (accounts[index].owner === currentUser) {
+                    accounts.splice(index, 1);
+                    displayAccounts();
+                } else {
+                    alert("لا يمكنك حذف هذا الحساب.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
